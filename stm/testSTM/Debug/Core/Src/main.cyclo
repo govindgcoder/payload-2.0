@@ -1,0 +1,15 @@
+../Core/Src/main.c:69:5:main	4
+../Core/Src/main.c:124:6:USART2_IRQHandler	1
+../Core/Src/main.c:129:6:HAL_UART_RxCpltCallback	13
+../Core/Src/main.c:162:6:HAL_UART_ErrorCallback	3
+../Core/Src/main.c:176:5:_write	1
+../Core/Src/main.c:179:13:MX_USART2_UART_Init	2
+../Core/Src/main.c:198:6:Parse_GGA_Generic	9
+../Core/Src/main.c:217:9:MPU6050_Init	2
+../Core/Src/main.c:227:6:MPU6050_Calibrate	12
+../Core/Src/main.c:245:6:MPU6050_Read_AccelGyro	3
+../Core/Src/main.c:255:6:SystemClock_Config	1
+../Core/Src/main.c:263:13:MX_I2C1_Init	1
+../Core/Src/main.c:264:13:MX_USART1_UART_Init	1
+../Core/Src/main.c:265:13:MX_GPIO_Init	1
+../Core/Src/main.c:266:6:Error_Handler	1

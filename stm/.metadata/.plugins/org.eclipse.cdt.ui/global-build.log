@@ -1,0 +1,463 @@
+16:34:59 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40368	    468	   2316	  43152	   a890	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+16:35:04 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-size  testSTM.elf 
+   text	   data	    bss	    dec	    hex	filename
+  40368	    468	   2316	  43152	   a890	testSTM.elf
+Finished building: default.size.stdout
+ 
+16:45:21 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-size  testSTM.elf 
+   text	   data	    bss	    dec	    hex	filename
+  40368	    468	   2316	  43152	   a890	testSTM.elf
+Finished building: default.size.stdout
+ 
+16:46:10 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-size  testSTM.elf 
+   text	   data	    bss	    dec	    hex	filename
+  40368	    468	   2316	  43152	   a890	testSTM.elf
+Finished building: default.size.stdout
+ 
+16:47:17 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-size  testSTM.elf 
+   text	   data	    bss	    dec	    hex	filename
+  40368	    468	   2316	  43152	   a890	testSTM.elf
+Finished building: default.size.stdout
+ 
+19:17:19 **** Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40368	    468	   2316	  43152	   a890	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+19:17:57 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-size  testSTM.elf 
+   text	   data	    bss	    dec	    hex	filename
+  40368	    468	   2316	  43152	   a890	testSTM.elf
+Finished building: default.size.stdout
+ 
+19:18:22 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-size  testSTM.elf 
+   text	   data	    bss	    dec	    hex	filename
+  40368	    468	   2316	  43152	   a890	testSTM.elf
+Finished building: default.size.stdout
+ 
+13:24:57 **** Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  37420	    468	   2284	  40172	   9cec	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+13:46:04 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'Parse_GNGGA':
+../Core/Src/main.c:224:27: warning: variable 'longitude' set but not used [-Wunused-but-set-variable]
+  224 |     float latitude = 0.0, longitude = 0.0;
+      |                           ^~~~~~~~~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38148	    468	   2300	  40916	   9fd4	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+13:57:12 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'Parse_GNGGA':
+../Core/Src/main.c:326:27: warning: variable 'longitude' set but not used [-Wunused-but-set-variable]
+  326 |     float latitude = 0.0, longitude = 0.0;
+      |                           ^~~~~~~~~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38516	    472	   2296	  41284	   a144	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+14:00:33 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'Parse_GNGGA':
+../Core/Src/main.c:267:27: warning: variable 'longitude' set but not used [-Wunused-but-set-variable]
+  267 |     float latitude = 0.0, longitude = 0.0;
+      |                           ^~~~~~~~~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38436	    472	   2296	  41204	   a0f4	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+14:15:37 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38452	    472	   2312	  41236	   a114	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+14:16:29 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-size  testSTM.elf 
+   text	   data	    bss	    dec	    hex	filename
+  38452	    472	   2312	  41236	   a114	testSTM.elf
+Finished building: default.size.stdout
+ 
+14:20:24 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:203:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  203 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |     ^~
+../Core/Src/main.c:203:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  203 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |                                                         ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38396	    472	   2312	  41180	   a0dc	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+14:22:15 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:155:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  155 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |     ^~
+../Core/Src/main.c:155:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  155 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |                                                         ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38436	    472	   2312	  41220	   a104	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+12:14:58 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:216:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  216 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |     ^~
+../Core/Src/main.c:216:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  216 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |                                                         ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38644	    472	   2320	  41436	   a1dc	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+13:58:14 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:219:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  219 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |     ^~
+../Core/Src/main.c:219:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  219 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |                                                         ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38644	    472	   2320	  41436	   a1dc	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+14:00:44 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:216:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  216 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |     ^~
+../Core/Src/main.c:216:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  216 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |                                                         ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38644	    472	   2320	  41436	   a1dc	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+14:06:00 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:127:12: warning: too many arguments for format [-Wformat-extra-args]
+  127 |     printf("DATA> T:%lu | A:%d,%d,%d | G:%d,%d,%d | Lat:%.5f Lon:%.5f Alt:%.2f Sats:%d\n",
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:218:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  218 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |     ^~
+../Core/Src/main.c:218:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  218 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |                                                         ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38668	    472	   2328	  41468	   a1fc	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+14:06:39 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-size  testSTM.elf 
+   text	   data	    bss	    dec	    hex	filename
+  38668	    472	   2328	  41468	   a1fc	testSTM.elf
+Finished building: default.size.stdout
+ 
+14:07:01 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:127:101: warning: format '%d' expects argument of type 'int', but argument 13 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  127 |     printf("DATA> T:%lu | A:%d,%d,%d | G:%d,%d,%d | Lat:%.5f Lon:%.5f Alt:%.2f Sats:%d baro_count: %d\n",
+      |                                                                                                    ~^
+      |                                                                                                     |
+      |                                                                                                     int
+      |                                                                                                    %ld
+......
+  133 |            vehicleState.Satellites, baro_irq_count);
+      |                                     ~~~~~~~~~~~~~~                                                   
+      |                                     |
+      |                                     uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:218:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  218 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |     ^~
+../Core/Src/main.c:218:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  218 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |                                                         ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38684	    472	   2328	  41484	   a20c	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+14:14:48 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:127:101: warning: format '%d' expects argument of type 'int', but argument 13 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  127 |     printf("DATA> T:%lu | A:%d,%d,%d | G:%d,%d,%d | Lat:%.5f Lon:%.5f Alt:%.2f Sats:%d baro_count: %d\n",
+      |                                                                                                    ~^
+      |                                                                                                     |
+      |                                                                                                     int
+      |                                                                                                    %ld
+......
+  133 |            vehicleState.Satellites, baro_irq_count);
+      |                                     ~~~~~~~~~~~~~~                                                   
+      |                                     |
+      |                                     uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:218:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  218 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |     ^~
+../Core/Src/main.c:218:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  218 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |                                                         ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38724	    472	   2328	  41524	   a234	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+14:17:31 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:127:101: warning: format '%d' expects argument of type 'int', but argument 13 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  127 |     printf("DATA> T:%lu | A:%d,%d,%d | G:%d,%d,%d | Lat:%.5f Lon:%.5f Alt:%.2f Sats:%d baro_count: %d\n",
+      |                                                                                                    ~^
+      |                                                                                                     |
+      |                                                                                                     int
+      |                                                                                                    %ld
+......
+  133 |            vehicleState.Satellites, baro_irq_count);
+      |                                     ~~~~~~~~~~~~~~                                                   
+      |                                     |
+      |                                     uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:218:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  218 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |     ^~
+../Core/Src/main.c:218:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  218 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |                                                         ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38740	    472	   2328	  41540	   a244	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+14:18:01 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:128:101: warning: format '%d' expects argument of type 'int', but argument 13 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  128 |     printf("DATA> T:%lu | A:%d,%d,%d | G:%d,%d,%d | Lat:%.5f Lon:%.5f Alt:%.2f Sats:%d baro_count: %d\n",
+      |                                                                                                    ~^
+      |                                                                                                     |
+      |                                                                                                     int
+      |                                                                                                    %ld
+......
+  134 |            vehicleState.Satellites, baro_irq_count);
+      |                                     ~~~~~~~~~~~~~~                                                   
+      |                                     |
+      |                                     uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:219:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  219 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |     ^~
+../Core/Src/main.c:219:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  219 |     if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+      |                                                         ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38740	    472	   2328	  41540	   a244	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+14:19:45 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:164:27: warning: unused variable 'er' [-Wunused-variable]
+  164 |         volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                           ^~
+../Core/Src/main.c:168:27: warning: unused variable 'er' [-Wunused-variable]
+  168 |         volatile uint32_t er = HAL_UART_GetError(huart);
+      |                           ^~
+../Core/Src/main.c: In function 'Parse_GGA_Generic':
+../Core/Src/main.c:211:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  211 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |         ^~
+../Core/Src/main.c:211:40: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  211 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |                                        ^~~~~~~~~~~
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:242:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  242 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |     ^~
+../Core/Src/main.c:242:44: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  242 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |                                            ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  38796	    472	   2320	  41588	   a274	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 

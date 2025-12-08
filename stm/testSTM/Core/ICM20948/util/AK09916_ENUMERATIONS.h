@@ -1,0 +1,38 @@
+#ifndef _AK09916_ENUMERATIONS_H_
+#define _AK09916_ENUMERATIONS_H_
+
+// AK09916 Registers
+typedef enum
+{
+	AK09916_REG_WIA1 = 0x00,
+	AK09916_REG_WIA2 = 0x01,
+	AK09916_REG_RSV1 = 0x02,
+	AK09916_REG_ST1 = 0x10,
+	AK09916_REG_HXL = 0x11,
+	AK09916_REG_HXH = 0x12,
+	AK09916_REG_HYL = 0x13,
+	AK09916_REG_HYH = 0x14,
+	AK09916_REG_HZL = 0x15,
+	AK09916_REG_HZH = 0x16,
+	AK09916_REG_TMPS = 0x17,
+	AK09916_REG_ST2 = 0x18,
+	AK09916_REG_CNTL1 = 0x30,
+	AK09916_REG_CNTL2 = 0x31,
+	AK09916_REG_CNTL3 = 0x32,
+	AK09916_REG_TS1 = 0x33,
+	AK09916_REG_TS2 = 0x34,
+} AK09916_Reg_Addr_e;
+
+// AK09916 Modes
+typedef enum
+{
+	AK09916_mode_power_down = 0x00,
+	AK09916_mode_single = (0x01 << 0),
+	AK09916_mode_cont_10hz = (0x01 << 1),
+	AK09916_mode_cont_20hz = (0x02 << 1),
+	AK09916_mode_cont_50hz = (0x03 << 1),
+	AK09916_mode_cont_100hz = (0x04 << 1),
+	AK09916_mode_self_test = (0x01 << 4),
+} AK09916_mode_e;
+
+#endif // _AK09916_ENUMERATIONS_H_

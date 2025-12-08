@@ -1,0 +1,300 @@
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+
+/* --- MPU6050 Defines --- */
+#define MPU6050_ADDR         0xD0
+#define MPU_REG_WHO_AM_I     0x75
+#define MPU_REG_PWR_MGMT_1   0x6B
+#define MPU_REG_GYRO_CONFIG  0x1B
+#define MPU_REG_ACCEL_CONFIG 0x1C
+#define MPU_REG_ACCEL_XOUT_H 0x3B
+
+// Sensitivity Scaling (For 16g range, 1g = 2048 raw)
+#define MPU_1G_RAW           2048
+
+/* --- GPS Defines (Quectel L89) --- */
+#define NMEA_BUFFER_SIZE     128
+
+/* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c1;
+UART_HandleTypeDef huart1; // GPS
+UART_HandleTypeDef huart2; // ESP32 (TX=Debug Out, RX=Baro In)
+
+// --- UNIFIED SYSTEM STATE ---
+typedef struct {
+    // IMU Data
+    int16_t AccX, AccY, AccZ;
+    int16_t GyroX, GyroY, GyroZ;
+
+    // GPS Data
+    float Latitude;
+    float Longitude;
+    int Satellites;
+    uint8_t FixStatus; // 0=No Fix, 1=Fix
+
+    // NEW: Barometer Altitude (from ESP32)
+    float BaroAlt;
+} RocketState_t;
+
+RocketState_t vehicleState = {0};
+
+// --- Barometer Rx Variables ---
+uint8_t baro_rx_byte;
+uint8_t baro_buffer[4];
+uint8_t baro_idx = 0;
+uint8_t baro_state = 0; // 0=Header, 1=Data, 2=Footer
+volatile uint32_t baro_irq_count = 0;
+
+// --- Calibration Globals ---
+int16_t AccX_Offset=0, AccY_Offset=0, AccZ_Offset=0;
+int16_t GyroX_Offset=0, GyroY_Offset=0, GyroZ_Offset=0;
+
+// Orientation flags
+uint8_t Vertical_Axis = 2;
+int8_t  Vertical_Sign = 1;
+
+// --- GPS Variables ---
+uint8_t gps_rx_char;
+char nmea_buffer[NMEA_BUFFER_SIZE];
+uint8_t nmea_idx = 0;
+volatile uint8_t gps_data_ready = 0;
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_I2C1_Init(void);
+static void MX_USART1_UART_Init(void);
+static void MX_USART2_UART_Init(void);
+uint8_t MPU6050_Init(void);
+void MPU6050_Calibrate(void);
+void MPU6050_Read_AccelGyro(void);
+void Parse_GGA_Generic(char* nmea);
+
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+  MX_I2C1_Init();
+  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
+
+  printf("\n--- VeloCET Payload: Sensor Hub Mode ---\n");
+
+  // 1. Initialize MPU
+  if (MPU6050_Init() == 0) {
+      printf("SUCCESS: MPU6050 Initialized.\n");
+  } else {
+      printf("FAILURE: MPU6050 not found!\n");
+      while(1) { HAL_Delay(100); }
+  }
+
+  // 2. Auto-Calibrate
+  printf("Calibrating IMU... KEEP STILL!\n");
+  HAL_Delay(2000);
+  MPU6050_Calibrate();
+  printf("Calibration Complete.\n");
+
+  // 3. Start Interrupts
+  // Listen for GPS data (UART1)
+  HAL_UART_Receive_IT(&huart1, &gps_rx_char, 1);
+  // Listen for Barometer data from ESP32 (UART2)
+  HAL_UART_Receive_IT(&huart2, &baro_rx_byte, 1);
+
+  printf("Main Loop Running.\n");
+
+  while (1)
+  {
+    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+
+    // --- STEP 1: Process GPS ---
+    if (gps_data_ready) {
+        if (strstr(nmea_buffer, "GGA") != NULL) {
+            Parse_GGA_Generic(nmea_buffer);
+        }
+        gps_data_ready = 0;
+    }
+
+    // --- STEP 2: Process IMU ---
+    MPU6050_Read_AccelGyro();
+
+    // --- STEP 3: Print Unified Status ---
+    // Added "Alt:%.2f" to show the barometer data
+    printf("DATA> T:%lu | A:%d,%d,%d | G:%d,%d,%d | Lat:%.5f Lon:%.5f Alt:%.2f Sats:%d baro_count: %d\n",
+           HAL_GetTick(),
+           vehicleState.AccX, vehicleState.AccY, vehicleState.AccZ,
+           vehicleState.GyroX, vehicleState.GyroY, vehicleState.GyroZ,
+           vehicleState.Latitude, vehicleState.Longitude,
+           vehicleState.BaroAlt, // <--- New Data!
+           vehicleState.Satellites, baro_irq_count);
+
+    HAL_Delay(100);
+  }
+}
+
+// -------------------------------------------------------------------------
+//  UART Interrupt Callback (Handles Both GPS and Baro)
+// -------------------------------------------------------------------------
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+
+  // --- Case 1: GPS Data (UART 1) ---
+  if (huart->Instance == USART1) {
+    if (gps_rx_char == '\n' || nmea_idx >= NMEA_BUFFER_SIZE - 1) {
+        nmea_buffer[nmea_idx] = '\0'; gps_data_ready = 1; nmea_idx = 0;
+    } else if (gps_rx_char != '\r') {
+        nmea_buffer[nmea_idx++] = gps_rx_char;
+    }
+    HAL_UART_Receive_IT(&huart1, &gps_rx_char, 1);
+  }
+
+  // --- Case 2: Baro Data from ESP32 (UART 2) ---
+  else if (huart->Instance == USART2) {
+	  baro_irq_count++;
+      // Packet Format: [0xBB] [Float Byte 1] [2] [3] [4] [0x55]
+      switch (baro_state) {
+          case 0: // Waiting for Header
+              if (baro_rx_byte == 0xBB) {
+                  baro_idx = 0;
+                  baro_state = 1;
+              }
+              break;
+
+          case 1: // Reading 4 Data Bytes
+              baro_buffer[baro_idx++] = baro_rx_byte;
+              if (baro_idx >= 4) {
+                  baro_state = 2;
+              }
+              break;
+
+          case 2: // Checking Footer
+              if (baro_rx_byte == 0x55) {
+                  // Valid Packet! Convert bytes to float
+                  memcpy(&vehicleState.BaroAlt, baro_buffer, 4);
+              }
+              baro_state = 0; // Reset
+              break;
+      }
+
+      // Re-arm Interrupt for next byte
+      HAL_UART_Receive_IT(&huart2, &baro_rx_byte, 1);
+  }
+}
+
+// -------------------------------------------------------------------------
+//  MPU6050 Driver
+// -------------------------------------------------------------------------
+uint8_t MPU6050_Init(void) {
+    uint8_t check, data;
+    HAL_I2C_Mem_Read(&hi2c1, MPU6050_ADDR, MPU_REG_WHO_AM_I, 1, &check, 1, 1000);
+    if (check == 0x68) {
+        data = 0x00; HAL_I2C_Mem_Write(&hi2c1, MPU6050_ADDR, MPU_REG_PWR_MGMT_1, 1, &data, 1, 1000);
+        data = 0x18; HAL_I2C_Mem_Write(&hi2c1, MPU6050_ADDR, MPU_REG_GYRO_CONFIG, 1, &data, 1, 1000);
+        data = 0x18; HAL_I2C_Mem_Write(&hi2c1, MPU6050_ADDR, MPU_REG_ACCEL_CONFIG, 1, &data, 1, 1000);
+        return 0;
+    } return 1;
+}
+
+void MPU6050_Calibrate(void) {
+    int32_t Aa[3] = {0,0,0}; int32_t Ag[3] = {0,0,0}; uint8_t Rec_Data[14];
+    for(int i=0; i<1000; i++) {
+        HAL_I2C_Mem_Read(&hi2c1, MPU6050_ADDR, MPU_REG_ACCEL_XOUT_H, 1, Rec_Data, 14, 1000);
+        Aa[0] += (int16_t)(Rec_Data[0] << 8 | Rec_Data[1]); Aa[1] += (int16_t)(Rec_Data[2] << 8 | Rec_Data[3]); Aa[2] += (int16_t)(Rec_Data[4] << 8 | Rec_Data[5]);
+        Ag[0] += (int16_t)(Rec_Data[8] << 8 | Rec_Data[9]); Ag[1] += (int16_t)(Rec_Data[10] << 8 | Rec_Data[11]); Ag[2] += (int16_t)(Rec_Data[12] << 8 | Rec_Data[13]);
+        HAL_Delay(1);
+    }
+    int16_t AvgAccX = Aa[0]/1000, AvgAccY = Aa[1]/1000, AvgAccZ = Aa[2]/1000;
+    int16_t absX = abs(AvgAccX), absY = abs(AvgAccY), absZ = abs(AvgAccZ);
+    if (absX > absY && absX > absZ) { Vertical_Axis = 0; Vertical_Sign = (AvgAccX > 0) ? 1 : -1; }
+    else if (absY > absX && absY > absZ) { Vertical_Axis = 1; Vertical_Sign = (AvgAccY > 0) ? 1 : -1; }
+    else { Vertical_Axis = 2; Vertical_Sign = (AvgAccZ > 0) ? 1 : -1; }
+
+    GyroX_Offset = Ag[0]/1000; GyroY_Offset = Ag[1]/1000; GyroZ_Offset = Ag[2]/1000;
+    int16_t gravity_raw = MPU_1G_RAW * Vertical_Sign;
+    AccX_Offset = AvgAccX; AccY_Offset = AvgAccY; AccZ_Offset = AvgAccZ;
+    if (Vertical_Axis == 0) AccX_Offset -= gravity_raw; if (Vertical_Axis == 1) AccY_Offset -= gravity_raw; if (Vertical_Axis == 2) AccZ_Offset -= gravity_raw;
+}
+
+void MPU6050_Read_AccelGyro(void) {
+    uint8_t Rec_Data[14];
+    HAL_I2C_Mem_Read(&hi2c1, MPU6050_ADDR, MPU_REG_ACCEL_XOUT_H, 1, Rec_Data, 14, 1000);
+    int16_t rawX = (int16_t)(Rec_Data[0] << 8 | Rec_Data[1]), rawY = (int16_t)(Rec_Data[2] << 8 | Rec_Data[3]), rawZ = (int16_t)(Rec_Data[4] << 8 | Rec_Data[5]);
+    int16_t rawGx = (int16_t)(Rec_Data[8] << 8 | Rec_Data[9]), rawGy = (int16_t)(Rec_Data[10] << 8 | Rec_Data[11]), rawGz = (int16_t)(Rec_Data[12] << 8 | Rec_Data[13]);
+    rawX -= AccX_Offset; rawY -= AccY_Offset; rawZ -= AccZ_Offset; rawGx -= GyroX_Offset; rawGy -= GyroY_Offset; rawGz -= GyroZ_Offset;
+
+    // Remap Accel AND Gyro based on Vertical Axis
+    if (Vertical_Axis == 0) {
+        vehicleState.AccZ = rawX * Vertical_Sign; vehicleState.AccY = rawY; vehicleState.AccX = rawZ;
+        vehicleState.GyroZ = rawGx * Vertical_Sign; vehicleState.GyroY = rawGy; vehicleState.GyroX = rawGz;
+    }
+    else if (Vertical_Axis == 1) {
+        vehicleState.AccZ = rawY * Vertical_Sign; vehicleState.AccX = rawX; vehicleState.AccY = rawZ;
+        vehicleState.GyroZ = rawGy * Vertical_Sign; vehicleState.GyroX = rawGx; vehicleState.GyroY = rawGz;
+    }
+    else {
+        vehicleState.AccZ = rawZ * Vertical_Sign; vehicleState.AccX = rawX; vehicleState.AccY = rawY;
+        vehicleState.GyroZ = rawGz * Vertical_Sign; vehicleState.GyroX = rawGx; vehicleState.GyroY = rawGy;
+    }
+}
+
+// -------------------------------------------------------------------------
+//  GPS Logic
+// -------------------------------------------------------------------------
+void Parse_GGA_Generic(char* nmea) {
+    char* current_pos = nmea;
+    int field_index = 0;
+    float temp_lat = 0.0, temp_lon = 0.0;
+    int temp_sats = 0, temp_fix = 0;
+
+    while (*current_pos != '\0') {
+        char* next_comma = strchr(current_pos, ',');
+        if (next_comma != NULL) *next_comma = '\0';
+        if (*current_pos != '\0') {
+            switch (field_index) {
+                case 2: temp_lat = atof(current_pos); break;
+                case 4: temp_lon = atof(current_pos); break;
+                case 6: temp_fix = atoi(current_pos); break;
+                case 7: temp_sats = atoi(current_pos); break;
+            }
+        }
+        if (next_comma == NULL) break;
+        current_pos = next_comma + 1;
+        field_index++;
+    }
+    vehicleState.Latitude = temp_lat; vehicleState.Longitude = temp_lon;
+    vehicleState.FixStatus = temp_fix; vehicleState.Satellites = temp_sats;
+}
+
+int _write(int file, char *ptr, int len) { HAL_UART_Transmit(&huart2, (uint8_t*)ptr, len, HAL_MAX_DELAY); return len; }
+void SystemClock_Config(void) {
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0}; RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  __HAL_RCC_PWR_CLK_ENABLE(); __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI; RCC_OscInitStruct.HSIState = RCC_HSI_ON; RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT; RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON; RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI; RCC_OscInitStruct.PLL.PLLM = 8; RCC_OscInitStruct.PLL.PLLN = 84; RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2; RCC_OscInitStruct.PLL.PLLQ = 4;
+  HAL_RCC_OscConfig(&RCC_OscInitStruct);
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK|RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2; RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK; RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1; RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2; RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
+}
+static void MX_I2C1_Init(void) { hi2c1.Instance = I2C1; hi2c1.Init.ClockSpeed = 100000; hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2; hi2c1.Init.OwnAddress1 = 0; hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT; hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE; hi2c1.Init.OwnAddress2 = 0; hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE; hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE; HAL_I2C_Init(&hi2c1); }
+static void MX_USART1_UART_Init(void) { huart1.Instance = USART1; huart1.Init.BaudRate = 9600; huart1.Init.WordLength = UART_WORDLENGTH_8B; huart1.Init.StopBits = UART_STOPBITS_1; huart1.Init.Parity = UART_PARITY_NONE; huart1.Init.Mode = UART_MODE_TX_RX; huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE; huart1.Init.OverSampling = UART_OVERSAMPLING_16; HAL_UART_Init(&huart1); }
+static void MX_USART2_UART_Init(void) {
+	huart2.Instance = USART2;
+	huart2.Init.BaudRate = 115200;
+	huart2.Init.WordLength = UART_WORDLENGTH_8B;
+	huart2.Init.StopBits = UART_STOPBITS_1;
+	huart2.Init.Parity = UART_PARITY_NONE;
+	huart2.Init.Mode = UART_MODE_TX_RX;
+	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+	HAL_UART_Init(&huart2);
+	if (HAL_UART_Init(&huart2) != HAL_OK) {
+	    Error_Handler();
+	  }
+
+	  HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+	  HAL_NVIC_EnableIRQ(USART2_IRQn);
+}
+static void MX_GPIO_Init(void) { GPIO_InitTypeDef GPIO_InitStruct = {0}; __HAL_RCC_GPIOC_CLK_ENABLE(); __HAL_RCC_GPIOA_CLK_ENABLE(); __HAL_RCC_GPIOB_CLK_ENABLE(); HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET); GPIO_InitStruct.Pin = GPIO_PIN_13; GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP; GPIO_InitStruct.Pull = GPIO_NOPULL; GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW; HAL_GPIO_Init(GPIOC, &GPIO_InitStruct); }
+void Error_Handler(void) { __disable_irq(); while (1) {} }

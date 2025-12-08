@@ -1,0 +1,43 @@
+18:23:48 **** Incremental Build of configuration Debug for project stm-code ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:110:9: warning: unused variable 'altitude' [-Wunused-variable]
+  110 |   float altitude = 500.0f;
+      |         ^~~~~~~~
+../Core/Src/main.c:109:9: warning: unused variable 'longitude' [-Wunused-variable]
+  109 |   float longitude = 78.9101f;
+      |         ^~~~~~~~~
+../Core/Src/main.c:108:9: warning: unused variable 'latitude' [-Wunused-variable]
+  108 |   float latitude = 12.3456f;
+      |         ^~~~~~~~
+../Core/Src/main.c:107:9: warning: unused variable 'qZ' [-Wunused-variable]
+  107 |   float qZ = 0.0f;
+      |         ^~
+../Core/Src/main.c:106:9: warning: unused variable 'qY' [-Wunused-variable]
+  106 |   float qY = 0.0f;
+      |         ^~
+../Core/Src/main.c:105:9: warning: unused variable 'qX' [-Wunused-variable]
+  105 |   float qX = 0.0f;
+      |         ^~
+../Core/Src/main.c:104:9: warning: unused variable 'qW' [-Wunused-variable]
+  104 |   float qW = 1.0f;
+      |         ^~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:95:11: warning: 'calculateChecksum' defined but not used [-Wunused-function]
+   95 |   uint8_t calculateChecksum(const uint8_t* data, uint8_t length) {
+      |           ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "stm-code.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\stm-code\STM32F401CCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm-code.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm-code.elf
+ 
+arm-none-eabi-size  stm-code.elf 
+arm-none-eabi-objdump -h -S stm-code.elf  > "stm-code.list"
+   text	   data	    bss	    dec	    hex	filename
+   8356	     12	   1644	  10012	   271c	stm-code.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm-code.list
+ 
+
+18:23:50 Build Finished. 0 errors, 8 warnings. (took 1s.156ms)
+
