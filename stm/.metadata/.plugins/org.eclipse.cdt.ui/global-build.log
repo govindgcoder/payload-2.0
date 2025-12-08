@@ -461,3 +461,211 @@ Finished building: default.size.stdout
  
 Finished building: testSTM.list
  
+21:33:20 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:17: warning: "M_PI" redefined
+   17 | #define M_PI                             3.14159265359
+      | 
+In file included from ../Core/Src/main.c:6:
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/math.h:614: note: this is the location of the previous definition
+  614 | #define M_PI            3.14159265358979323846
+      | 
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:142:29: error: called object is not a function or function pointer
+  142 |                   f_gx=(f_gx/16.4)(M_PI/180);
+      |                        ~~~~~^~~~~~
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:201:27: warning: unused variable 'er' [-Wunused-variable]
+  201 |         volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                           ^~
+../Core/Src/main.c:205:27: warning: unused variable 'er' [-Wunused-variable]
+  205 |         volatile uint32_t er = HAL_UART_GetError(huart);
+      |                           ^~
+../Core/Src/main.c: In function 'Parse_GGA_Generic':
+../Core/Src/main.c:248:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  248 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |         ^~
+../Core/Src/main.c:248:40: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  248 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |                                        ^~~~~~~~~~~
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:279:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  279 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |     ^~
+../Core/Src/main.c:279:44: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  279 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |                                            ^~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:34:55 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:17: warning: "M_PI" redefined
+   17 | #define M_PI                             3.14159265359
+      | 
+In file included from ../Core/Src/main.c:6:
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/math.h:614: note: this is the location of the previous definition
+  614 | #define M_PI            3.14159265358979323846
+      | 
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:201:27: warning: unused variable 'er' [-Wunused-variable]
+  201 |         volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                           ^~
+../Core/Src/main.c:205:27: warning: unused variable 'er' [-Wunused-variable]
+  205 |         volatile uint32_t er = HAL_UART_GetError(huart);
+      |                           ^~
+../Core/Src/main.c: In function 'Parse_GGA_Generic':
+../Core/Src/main.c:248:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  248 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |         ^~
+../Core/Src/main.c:248:40: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  248 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |                                        ^~~~~~~~~~~
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:279:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  279 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |     ^~
+../Core/Src/main.c:279:44: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  279 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |                                            ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/main.o: in function `main':
+C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Debug/../Core/Src/main.c:146:(.text.main+0x20c): undefined reference to `madgwickUpdate'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:89: testSTM.elf] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:38:21 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:42:1: warning: data definition has no type or storage class
+   42 | ma_pi = (float)M_PI;
+      | ^~~~~
+../Core/Src/main.c:42:1: warning: type defaults to 'int' in declaration of 'ma_pi' [-Wimplicit-int]
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:206:27: warning: unused variable 'er' [-Wunused-variable]
+  206 |         volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                           ^~
+../Core/Src/main.c:210:27: warning: unused variable 'er' [-Wunused-variable]
+  210 |         volatile uint32_t er = HAL_UART_GetError(huart);
+      |                           ^~
+../Core/Src/main.c: In function 'Parse_GGA_Generic':
+../Core/Src/main.c:253:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  253 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |         ^~
+../Core/Src/main.c:253:40: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  253 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |                                        ^~~~~~~~~~~
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:284:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  284 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |     ^~
+../Core/Src/main.c:284:44: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  284 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |                                            ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  39188	    476	   2324	  41988	   a404	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+21:39:17 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:42:1: warning: data definition has no type or storage class
+   42 | ma_pi = (float)M_PI;
+      | ^~~~~
+../Core/Src/main.c:42:1: warning: type defaults to 'int' in declaration of 'ma_pi' [-Wimplicit-int]
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:206:27: warning: unused variable 'er' [-Wunused-variable]
+  206 |         volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                           ^~
+../Core/Src/main.c:210:27: warning: unused variable 'er' [-Wunused-variable]
+  210 |         volatile uint32_t er = HAL_UART_GetError(huart);
+      |                           ^~
+../Core/Src/main.c: In function 'Parse_GGA_Generic':
+../Core/Src/main.c:253:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  253 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |         ^~
+../Core/Src/main.c:253:40: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  253 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |                                        ^~~~~~~~~~~
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:284:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  284 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |     ^~
+../Core/Src/main.c:284:44: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  284 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |                                            ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  39188	    476	   2324	  41988	   a404	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+22:12:40 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:271:27: warning: unused variable 'er' [-Wunused-variable]
+  271 |         volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                           ^~
+../Core/Src/main.c:275:27: warning: unused variable 'er' [-Wunused-variable]
+  275 |         volatile uint32_t er = HAL_UART_GetError(huart);
+      |                           ^~
+../Core/Src/main.c: In function 'Parse_GGA_Generic':
+../Core/Src/main.c:318:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  318 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |         ^~
+../Core/Src/main.c:318:40: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  318 |         if (next_comma == NULL) break; current_pos = next_comma + 1; field_index++;
+      |                                        ^~~~~~~~~~~
+../Core/Src/main.c: In function 'MPU6050_Calibrate':
+../Core/Src/main.c:349:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  349 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |     ^~
+../Core/Src/main.c:349:44: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  349 |     if(Vertical_Axis==0)AccX_Offset-=gRaw; if(Vertical_Axis==1)AccY_Offset-=gRaw; if(Vertical_Axis==2)AccZ_Offset-=gRaw;
+      |                                            ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40604	    472	   2320	  43396	   a984	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+22:16:41 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:290:35: warning: unused variable 'er' [-Wunused-variable]
+  290 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                                   ^~
+../Core/Src/main.c:293:35: warning: unused variable 'er' [-Wunused-variable]
+  293 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+      |                                   ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40660	    472	   2320	  43452	   a9bc	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 

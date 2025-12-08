@@ -11,14 +11,14 @@
 #define RX_PIN 16
 #define TX_PIN 17
 
-Adafruit_BME280 bme; // I2C
+Adafruit_BME280 bme;  // I2C
 
 // ===================================================================
 // TASK 1: RECEIVE DATA FROM STM32 & PRINT TO PC (Downlink)
 // ===================================================================
 void receiveStmTextTask(void *pvParameters) {
   Serial.println("STM32 Receiver Task started.");
-  static char buffer[256]; // Larger buffer for long log lines
+  static char buffer[256];  // Larger buffer for long log lines
   static int index = 0;
 
   for (;;) {
@@ -28,18 +28,17 @@ void receiveStmTextTask(void *pvParameters) {
 
       // If newline, print the full line
       if (incoming_char == '\n') {
-        buffer[index] = '\0'; 
+        buffer[index] = '\0';
         Serial.printf("[STM32] %s\n", buffer);
         index = 0;
-      } 
-      else if (index < 255) {
+      } else if (index < 255) {
         if (incoming_char != '\r') {
           buffer[index++] = incoming_char;
         }
       }
     }
     // Tiny delay to let other tasks run, but fast enough to catch text
-    vTaskDelay(1 / portTICK_PERIOD_MS); 
+    vTaskDelay(1 / portTICK_PERIOD_MS);
   }
 }
 
@@ -48,20 +47,23 @@ void receiveStmTextTask(void *pvParameters) {
 // ===================================================================
 void sendBaroTask(void *pvParameters) {
   Serial.println("Barometer Sender Task started (TEST MODE).");
-  
+
   for (;;) {
-    float altitude = bme.readAltitude(SEALEVELPRESSURE_HPA); 
+    float altitude = bme.readAltitude(SEALEVELPRESSURE_HPA);
 
     // Prepare Packet
-    union { float f; byte b[4]; } altData;
+    union {
+      float f;
+      byte b[4];
+    } altData;
     altData.f = altitude;
 
     // Send Unconditionally
-    STM32_SERIAL.write(0xBB);       
-    STM32_SERIAL.write(altData.b, 4); 
-    STM32_SERIAL.write(0x55);       
+    STM32_SERIAL.write(0xBB);
+    STM32_SERIAL.write(altData.b, 4);
+    STM32_SERIAL.write(0x55);
 
-    vTaskDelay(100 / portTICK_PERIOD_MS); 
+    vTaskDelay(100 / portTICK_PERIOD_MS);
   }
 }
 
@@ -70,8 +72,9 @@ void sendBaroTask(void *pvParameters) {
 // ===================================================================
 void setup() {
   // 1. PC Serial (Debug)
-  Serial.begin(115200); 
-  while(!Serial);
+  Serial.begin(115200);
+  while (!Serial)
+    ;
   delay(1000);
   Serial.println("\n--- ESP32 Hub (BME280 + STM32 Link) ---");
 
@@ -79,8 +82,8 @@ void setup() {
   STM32_SERIAL.begin(115200, SERIAL_8N1, RX_PIN, TX_PIN);
 
   // 3. I2C & BME280 Setup
-  Wire.begin(); // Standard 21/22
-  
+  Wire.begin();  // Standard 21/22
+
   if (!bme.begin(0x76)) {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
     // We don't halt here so we can still see STM32 logs if the sensor fails
@@ -96,5 +99,5 @@ void setup() {
 }
 
 void loop() {
-  vTaskDelete(NULL); 
+  vTaskDelete(NULL);
 }
