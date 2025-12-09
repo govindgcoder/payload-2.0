@@ -17,7 +17,7 @@ Adafruit_BME280 bme;  // I2C
 // TASK 1: RECEIVE DATA FROM STM32 & PRINT TO PC (Downlink)
 // ===================================================================
 void receiveStmTextTask(void *pvParameters) {
-  Serial.println("STM32 Receiver Task started.");
+  // Serial.println("STM32 Receiver Task started.");
   static char buffer[256];  // Larger buffer for long log lines
   static int index = 0;
 
@@ -29,7 +29,7 @@ void receiveStmTextTask(void *pvParameters) {
       // If newline, print the full line
       if (incoming_char == '\n') {
         buffer[index] = '\0';
-        Serial.printf("[STM32] %s\n", buffer);
+        Serial.printf("%s\n", buffer);
         index = 0;
       } else if (index < 255) {
         if (incoming_char != '\r') {
@@ -46,7 +46,7 @@ void receiveStmTextTask(void *pvParameters) {
 // TASK 2: READ BAROMETER & SEND TO STM32 (Uplink)
 // ===================================================================
 void sendBaroTask(void *pvParameters) {
-  Serial.println("Barometer Sender Task started (TEST MODE).");
+  // Serial.println("Barometer Sender Task started (TEST MODE).");
 
   for (;;) {
     float altitude = bme.readAltitude(SEALEVELPRESSURE_HPA);
@@ -76,7 +76,7 @@ void setup() {
   while (!Serial)
     ;
   delay(1000);
-  Serial.println("\n--- ESP32 Hub (BME280 + STM32 Link) ---");
+  // Serial.println("\n--- ESP32 Hub (BME280 + STM32 Link) ---");
 
   // 2. STM32 Serial
   STM32_SERIAL.begin(115200, SERIAL_8N1, RX_PIN, TX_PIN);
@@ -85,10 +85,10 @@ void setup() {
   Wire.begin();  // Standard 21/22
 
   if (!bme.begin(0x76)) {
-    Serial.println("Could not find a valid BME280 sensor, check wiring!");
+    // Serial.println("Could not find a valid BME280 sensor, check wiring!");
     // We don't halt here so we can still see STM32 logs if the sensor fails
   } else {
-    Serial.println("BME280 Sensor Found.");
+    // Serial.println("BME280 Sensor Found.");
   }
 
   // 4. Create Tasks

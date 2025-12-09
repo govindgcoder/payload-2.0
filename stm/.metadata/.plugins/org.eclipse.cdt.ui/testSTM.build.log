@@ -1,12 +1,16 @@
-22:16:41 **** Incremental Build of configuration Debug for project testSTM ****
+13:26:23 **** Incremental Build of configuration Debug for project testSTM ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:94:13: warning: variable 'temp' set but not used [-Wunused-but-set-variable]
+   94 |         int temp = 0;
+      |             ^~~~
 ../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
-../Core/Src/main.c:290:35: warning: unused variable 'er' [-Wunused-variable]
-  290 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+../Core/Src/main.c:320:35: warning: unused variable 'er' [-Wunused-variable]
+  320 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
       |                                   ^~
-../Core/Src/main.c:293:35: warning: unused variable 'er' [-Wunused-variable]
-  293 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+../Core/Src/main.c:323:35: warning: unused variable 'er' [-Wunused-variable]
+  323 |                 volatile uint32_t er = HAL_UART_GetError(huart);
       |                                   ^~
 arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 Finished building target: testSTM.elf
@@ -14,11 +18,11 @@ Finished building target: testSTM.elf
 arm-none-eabi-size  testSTM.elf 
 arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
    text	   data	    bss	    dec	    hex	filename
-  40660	    472	   2320	  43452	   a9bc	testSTM.elf
+  40556	    472	   2320	  43348	   a954	testSTM.elf
 Finished building: default.size.stdout
  
 Finished building: testSTM.list
  
 
-22:16:43 Build Finished. 0 errors, 2 warnings. (took 1s.836ms)
+13:26:24 Build Finished. 0 errors, 3 warnings. (took 1s.696ms)
 

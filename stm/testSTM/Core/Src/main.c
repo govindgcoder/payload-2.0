@@ -39,7 +39,7 @@ typedef struct {
 
 RocketState_t vehicleState = { 0 };
 
-//Madgwick filter
+//for imu filters
 
 typedef struct quaternion {
 	float q0;
@@ -52,6 +52,8 @@ typedef struct quaternion {
 
 void madgwickUpdate(quaternion *q, float ax, float ay, float az, float gx,
 		float gy, float gz);
+//lx = linear acceleration for x
+void gravityCorrection(quaternion *q, float *lx, float *ly, float *lz, float ax, float ay, float az);
 
 // --- Barometer Rx Variables ---
 uint8_t baro_rx_byte;
@@ -89,18 +91,19 @@ int main(void) {
 	MX_I2C1_Init();
 	MX_USART1_UART_Init();
 	MX_USART2_UART_Init(); // This function now includes the Interrupt Enable fix
-
-	printf("\n--- VeloCET Payload: Data Fusion Active ---\n");
+	int temp = 0;
+//	printf("\n--- VeloCET Payload: Data Fusion Active ---\n");
 
 	if (MPU6050_Init() == 0)
-		printf("MPU6050 OK.\n");
+//		printf("MPU6050 OK.\n");
+		temp = 1;
 	else
-		printf("MPU6050 FAIL.\n");
-
-	printf("Calibrating IMU... Keep Still.\n");
+//		printf("MPU6050 FAIL.\n");
+		temp = 0;
+//	printf("Calibrating IMU... Keep Still.\n");
 	HAL_Delay(2000);
 	MPU6050_Calibrate();
-	printf("Ready. Listening for GPS & Barometer...\n");
+//	printf("Ready. Listening for GPS & Barometer...\n");
 
 	// Start Interrupts
 	HAL_UART_Receive_IT(&huart1, &gps_rx_char, 1);
@@ -109,11 +112,18 @@ int main(void) {
 	uint32_t start_time = HAL_GetTick();
 
 	float f_ax, f_ay, f_az, f_gx, f_gy, f_gz;
+	float lx, ly, lz;
 
 	quaternion rocketQ = { 0 };
 	rocketQ.beta = 0.1;
 	rocketQ.q0 = 1.0;
 	rocketQ.sampleFreq = 100.0;
+
+	//for drift debug
+	quaternion driftQ = { 0 };
+	driftQ.beta = 0.0f;          // Correction OFF (Beta = 0)
+	driftQ.q0 = 1.0f;
+	driftQ.sampleFreq = 100.0f;
 
 	while (1) {
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
@@ -147,9 +157,16 @@ int main(void) {
 			f_gz = (f_gz / 16.4) * (PI / 180);
 
 			madgwickUpdate(&rocketQ, f_ax, f_ay, f_az, f_gx, f_gy, f_gz);
+			madgwickUpdate(&driftQ, f_ax, f_ay, f_az, f_gx, f_gy, f_gz);
+//			debug for 3d visualization of drift
+//			printf("S,%.4f,%.4f,%.4f,%.4f,D,%.4f,%.4f,%.4f,%.4f,E\r\n",
+//				       rocketQ.q0, rocketQ.q1, rocketQ.q2, rocketQ.q3,
+//				       driftQ.q0,  driftQ.q1,  driftQ.q2,  driftQ.q3);
 
-			printf("Q: %.3f, %.3f, %.3f, %.3f\r\n", rocketQ.q0, rocketQ.q1,
-					rocketQ.q2, rocketQ.q3);
+			//gravity correction for acc
+			gravityCorrection(&rocketQ, &lx, &ly, &lz, f_ax, f_ay, f_az);
+
+			printf("theta:%0.4f\n",rocketQ.q0);
 
 			start_time = HAL_GetTick();
 		}
@@ -157,6 +174,19 @@ int main(void) {
 }
 
 //function definitions
+
+void gravityCorrection(quaternion *q, float *lx, float *ly, float *lz, float ax, float ay, float az) {
+
+	float gx, gy, gz;
+	float q0 = q->q0, q1 = q->q1, q2 = q->q2, q3 = q->q3;
+	//gravity calculation
+	gx = 2*(q1*q3-q0*q2);
+	gy = 2*(q0*q1+q2*q3);
+	gz = q0*q0-q1*q1-q2*q2+q3*q3;
+	*lx=ax-gx;
+	*ly=ay-gy;
+	*lz=az-gz;
+}
 
 void madgwickUpdate(quaternion *q, float ax, float ay, float az, float gx,
 		float gy, float gz) {

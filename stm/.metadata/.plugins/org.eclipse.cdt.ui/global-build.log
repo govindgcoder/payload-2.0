@@ -669,3 +669,241 @@ Finished building: default.size.stdout
  
 Finished building: testSTM.list
  
+11:46:18 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:296:35: warning: unused variable 'er' [-Wunused-variable]
+  296 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                                   ^~
+../Core/Src/main.c:299:35: warning: unused variable 'er' [-Wunused-variable]
+  299 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+      |                                   ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40860	    472	   2320	  43652	   aa84	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+12:03:52 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:297:35: warning: unused variable 'er' [-Wunused-variable]
+  297 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                                   ^~
+../Core/Src/main.c:300:35: warning: unused variable 'er' [-Wunused-variable]
+  300 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+      |                                   ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40836	    472	   2320	  43628	   aa6c	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+12:14:34 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:92:13: warning: variable 'temp' set but not used [-Wunused-but-set-variable]
+   92 |         int temp=0;
+      |             ^~~~
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:298:35: warning: unused variable 'er' [-Wunused-variable]
+  298 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                                   ^~
+../Core/Src/main.c:301:35: warning: unused variable 'er' [-Wunused-variable]
+  301 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+      |                                   ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40452	    472	   2320	  43244	   a8ec	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+12:33:16 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:92:13: warning: variable 'temp' set but not used [-Wunused-but-set-variable]
+   92 |         int temp=0;
+      |             ^~~~
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:298:35: warning: unused variable 'er' [-Wunused-variable]
+  298 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                                   ^~
+../Core/Src/main.c:301:35: warning: unused variable 'er' [-Wunused-variable]
+  301 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+      |                                   ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40452	    472	   2320	  43244	   a8ec	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+13:18:20 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:94:13: warning: variable 'temp' set but not used [-Wunused-but-set-variable]
+   94 |         int temp = 0;
+      |             ^~~~
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:321:35: warning: unused variable 'er' [-Wunused-variable]
+  321 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                                   ^~
+../Core/Src/main.c:324:35: warning: unused variable 'er' [-Wunused-variable]
+  324 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+      |                                   ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40652	    472	   2320	  43444	   a9b4	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+13:19:39 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:94:13: warning: variable 'temp' set but not used [-Wunused-but-set-variable]
+   94 |         int temp = 0;
+      |             ^~~~
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:320:35: warning: unused variable 'er' [-Wunused-variable]
+  320 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                                   ^~
+../Core/Src/main.c:323:35: warning: unused variable 'er' [-Wunused-variable]
+  323 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+      |                                   ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40556	    472	   2320	  43348	   a954	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+13:20:37 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:94:13: warning: variable 'temp' set but not used [-Wunused-but-set-variable]
+   94 |         int temp = 0;
+      |             ^~~~
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:320:35: warning: unused variable 'er' [-Wunused-variable]
+  320 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                                   ^~
+../Core/Src/main.c:323:35: warning: unused variable 'er' [-Wunused-variable]
+  323 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+      |                                   ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40556	    472	   2320	  43348	   a954	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+13:22:04 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:94:13: warning: variable 'temp' set but not used [-Wunused-but-set-variable]
+   94 |         int temp = 0;
+      |             ^~~~
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:320:35: warning: unused variable 'er' [-Wunused-variable]
+  320 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                                   ^~
+../Core/Src/main.c:323:35: warning: unused variable 'er' [-Wunused-variable]
+  323 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+      |                                   ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40556	    472	   2320	  43348	   a954	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
+13:26:11 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:169:56: error: 'q0' undeclared (first use in this function); did you mean 'j0'?
+  169 |                         printf("theta:%0.4f\n",rocketQ,q0);
+      |                                                        ^~
+      |                                                        j0
+../Core/Src/main.c:169:56: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:94:13: warning: variable 'temp' set but not used [-Wunused-but-set-variable]
+   94 |         int temp = 0;
+      |             ^~~~
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:320:35: warning: unused variable 'er' [-Wunused-variable]
+  320 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                                   ^~
+../Core/Src/main.c:323:35: warning: unused variable 'er' [-Wunused-variable]
+  323 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+      |                                   ^~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:26:23 **** Incremental Build of configuration Debug for project testSTM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:94:13: warning: variable 'temp' set but not used [-Wunused-but-set-variable]
+   94 |         int temp = 0;
+      |             ^~~~
+../Core/Src/main.c: In function 'HAL_UART_ErrorCallback':
+../Core/Src/main.c:320:35: warning: unused variable 'er' [-Wunused-variable]
+  320 |                 volatile uint32_t er = HAL_UART_GetError(huart); // Clear flag
+      |                                   ^~
+../Core/Src/main.c:323:35: warning: unused variable 'er' [-Wunused-variable]
+  323 |                 volatile uint32_t er = HAL_UART_GetError(huart);
+      |                                   ^~
+arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testSTM.elf
+ 
+arm-none-eabi-size  testSTM.elf 
+arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
+   text	   data	    bss	    dec	    hex	filename
+  40556	    472	   2320	  43348	   a954	testSTM.elf
+Finished building: default.size.stdout
+ 
+Finished building: testSTM.list
+ 
