@@ -176,20 +176,20 @@ int main(void) {
 /* --- Sensor Fusion Algorithms --- */
 
 void KPredict(KState *k, float acc, float dt) {
-	float dt2 = dt*dt;
 	// 	state
-	k->pos=k->pos+k->vel*dt+0.5*acc*dt2;
+	k->pos=k->pos+k->vel*dt+0.5*acc*dt*dt;
 	k->vel=k->vel+acc*dt;
 	// 	error
 	float p00 = k->P[0][0];
 	float p01 = k->P[0][1];
 	float p10 = k->P[1][0];
 	float p11 = k->P[1][1];
+	float Q[2] = k->Q[];
 
-	k->P[0][0] = p00+(p10+p01*dt)+p11*dt2+k->Q[0];
+	k->P[0][0] = p00+p10*dt+(p01+p11*dt)*dt+Q[0];
 	k->P[0][1] = p01+p11*dt;
 	k->P[1][0] = p10+p11*dt;
-	k->P[1][1] = p11+k->Q[1];
+	k->P[1][1] = p11+Q[1];
 
 }
 

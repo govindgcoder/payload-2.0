@@ -178,7 +178,7 @@ int main(void) {
 void KPredict(KState *k, float acc, float dt) {
 	float dt2 = dt*dt;
 	// 	state
-	k->pos=k->pos+k->vel*dt+0.5*acc*dt2;
+	k->pos=k->pos+k->vel*dt+0.5*acc*dt*dt;
 	k->vel=k->vel+acc*dt;
 	// 	error
 	float p00 = k->P[0][0];
