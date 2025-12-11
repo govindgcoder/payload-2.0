@@ -46,7 +46,7 @@ void receiveStmTextTask(void *pvParameters) {
 // TASK 2: READ BAROMETER & SEND TO STM32 (Uplink)
 // ===================================================================
 void sendBaroTask(void *pvParameters) {
-  // Serial.println("Barometer Sender Task started (TEST MODE).");
+  Serial.println("Barometer Sender Task started (TEST MODE).");
 
   for (;;) {
     float altitude = bme.readAltitude(SEALEVELPRESSURE_HPA);
@@ -76,7 +76,7 @@ void setup() {
   while (!Serial)
     ;
   delay(1000);
-  // Serial.println("\n--- ESP32 Hub (BME280 + STM32 Link) ---");
+  Serial.println("\n--- ESP32 Hub (BME280 + STM32 Link) ---");
 
   // 2. STM32 Serial
   STM32_SERIAL.begin(115200, SERIAL_8N1, RX_PIN, TX_PIN);
@@ -85,14 +85,14 @@ void setup() {
   Wire.begin();  // Standard 21/22
 
   if (!bme.begin(0x76)) {
-    // Serial.println("Could not find a valid BME280 sensor, check wiring!");
+    Serial.println("Could not find a valid BME280 sensor, check wiring!");
     // We don't halt here so we can still see STM32 logs if the sensor fails
   } else {
-    // Serial.println("BME280 Sensor Found.");
+    Serial.println("BME280 Sensor Found.");
   }
 
   // 4. Create Tasks
-  // Core 1 is good for Comms
+  // Core 1 is good for Comms   
   xTaskCreatePinnedToCore(receiveStmTextTask, "RX STM32", 4096, NULL, 1, NULL, 1);
   // Core 1 is also fine for I2C (Wire library isn't thread-safe across cores anyway)
   xTaskCreatePinnedToCore(sendBaroTask, "TX Baro", 4096, NULL, 1, NULL, 1);

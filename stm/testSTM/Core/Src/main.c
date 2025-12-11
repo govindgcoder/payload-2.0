@@ -64,6 +64,8 @@ uint8_t baro_rx_byte;
 uint8_t baro_buffer[4];
 uint8_t baro_idx = 0;
 uint8_t baro_state = 0; // 0=Header, 1=Data, 2=Footer
+int baro_update=0;
+float ground_alt=0.0f;
 
 // IMU Calibration
 int16_t Acc_Offset[3] = {0}, Gyro_Offset[3] = {0};
@@ -84,6 +86,7 @@ void Parse_GGA_Generic(char *nmea);
 void MadgwickUpdate(Quaternion_t *q, float ax, float ay, float az, float gx, float gy, float gz);
 void GravityCorrection(Quaternion_t *q, float *lx, float *ly, float *lz, float ax, float ay, float az);
 void KPredict(KState *k, float acc, float dt);
+void KUpdate(KState *k, float m, float R);
 
 /* --- Main Application --- */
 int main(void) {
@@ -102,6 +105,8 @@ int main(void) {
 	HAL_Delay(2000); // Wait for sensor to stabilize
 	MPU6050_Calibrate();
 
+	//baro update flag
+
 	// Start Interrupts
 	HAL_UART_Receive_IT(&huart1, &gps_rx_char, 1);
 	HAL_UART_Receive_IT(&huart2, &baro_rx_byte, 1);
@@ -111,9 +116,6 @@ int main(void) {
 	float lx, ly, lz;
 
 	float dt=0.01;
-
-	// Drift debug quaternion
-	Quaternion_t driftQ = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 100.0f};
 
 	//kalman filter
 	KState kZ = {0};
@@ -130,9 +132,10 @@ int main(void) {
 	kZ.Q[0] = 0.01f;
 	kZ.Q[1] = 0.1f;
 
+
 	while (1) {
 		// 100Hz Loop (10ms)
-		if (HAL_GetTick() - last_tick > 10) {
+		if (HAL_GetTick() - last_tick >= 10) {
 			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13); // Heartbeat
 
 			// 1. Process GPS
@@ -157,7 +160,6 @@ int main(void) {
 
 			// 4. Run MGDW Filter
 			MadgwickUpdate(&rocketQ, f_ax, f_ay, f_az, f_gx, f_gy, f_gz);
-			MadgwickUpdate(&driftQ, f_ax, f_ay, f_az, f_gx, f_gy, f_gz);
 
 			// 5. Calculate Linear Acceleration (Gravity Removed)
 			GravityCorrection(&rocketQ, &lx, &ly, &lz, f_ax, f_ay, f_az);
@@ -165,8 +167,19 @@ int main(void) {
 			// 6. Run Kalman
 			KPredict(&kZ, lz * 9.81f, dt);
 
-			printf("Z_Pos: %.2f m | Z_Vel: %.2f m/s | Acc: %.2f g\r\n",
-			                   kZ.pos, kZ.vel, lz);
+			if (baro_update) {
+
+				if (ground_alt==0.0f){
+					ground_alt=vehicleState.BaroAlt;
+				}
+
+				float altitude_agl = vehicleState.BaroAlt-ground_alt;
+
+				KUpdate(&kZ, altitude_agl, 1.0f);
+				baro_update=0;
+			}
+
+			printf("%0.4f,%0.4f,%0.4f,%0.4f,%0.4f,%0.4f,%0.4f\n",rocketQ.q0,rocketQ.q1,rocketQ.q2,rocketQ.q3,vehicleState.Latitude,vehicleState.Longitude,kZ.pos);
 
 			last_tick = HAL_GetTick();
 		}
@@ -191,6 +204,27 @@ void KPredict(KState *k, float acc, float dt) {
 	k->P[1][0] = p10+p11*dt;
 	k->P[1][1] = p11+k->Q[1];
 
+}
+
+void KUpdate(KState *k, float m, float R){
+	//calc innovation y
+	float y = m-k->pos;
+	//innovation cov S
+	float S = k->P[0][0]+R;
+	//Kalman gain - trust factor
+	float K[2];
+	K[0]= k->P[0][0]/S;
+	K[1]= k->P[1][0]/S;
+	//update the states
+	k->pos = k->pos + K[0] * y;
+	k->vel = k->vel + K[1] * y;
+	//update cov mtx
+	float p00 = k->P[0][0];
+	float p01 = k->P[0][1];
+	k->P[0][0]-=K[0]*p00;
+	k->P[0][1]-=K[0]*p01;
+	k->P[1][0]-=K[1]*p00;
+	k->P[1][1]-=K[1]*p01;
 }
 
 void GravityCorrection(Quaternion_t *q, float *lx, float *ly, float *lz, float ax, float ay, float az) {
@@ -300,6 +334,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			baro_state = 0;
 			break;
 		}
+		baro_update=1;
 		HAL_UART_Receive_IT(&huart2, &baro_rx_byte, 1);
 	}
 }

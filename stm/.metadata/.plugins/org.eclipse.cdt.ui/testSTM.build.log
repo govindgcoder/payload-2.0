@@ -1,17 +1,10 @@
-14:44:03 **** Incremental Build of configuration Debug for project testSTM ****
+14:32:38 **** Incremental Build of configuration Debug for project testSTM ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948/util" -I../Core/Inc -I"C:/Users/govind/VeloCET/payload2.0/stm/testSTM/Core/ICM20948" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-g++ -o "testSTM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\govind\VeloCET\payload2.0\stm\testSTM\STM32F401CCUX_FLASH.ld" -Wl,-Map="testSTM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
-Finished building target: testSTM.elf
- 
 arm-none-eabi-size  testSTM.elf 
-arm-none-eabi-objdump -h -S testSTM.elf  > "testSTM.list"
    text	   data	    bss	    dec	    hex	filename
-  40844	    496	   2320	  43660	   aa8c	testSTM.elf
+  41220	    496	   2328	  44044	   ac0c	testSTM.elf
 Finished building: default.size.stdout
  
-Finished building: testSTM.list
- 
 
-14:44:05 Build Finished. 0 errors, 0 warnings. (took 1s.977ms)
+14:32:39 Build Finished. 0 errors, 0 warnings. (took 554ms)
 

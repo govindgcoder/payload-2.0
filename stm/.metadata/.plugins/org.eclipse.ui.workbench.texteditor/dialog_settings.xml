@@ -3,10 +3,12 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="HAL_GetTic"/>
+		<item value="baro_updat"/>
+		<item value="baro"/>
 		<item value="hal_get"/>
 		<item value="hal_getti"/>
 		<item value="hal_dela"/>
-		<item value="baro"/>
 		<item value="gps"/>
 		<item value="uart2"/>
 	</list>
