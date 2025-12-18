@@ -89,94 +89,103 @@ void KPredict(KState *k, float acc, float dt);
 void KUpdate(KState *k, float m, float R);
 
 /* --- Main Application --- */
-/* --- Main Application --- */
 int main(void) {
-    HAL_Init();
-    SystemClock_Config();
-    MX_GPIO_Init();
-    MX_I2C1_Init();
-    MX_USART1_UART_Init();
-    MX_USART2_UART_Init();
+	HAL_Init();
+	SystemClock_Config();
+	MX_GPIO_Init();
+	MX_I2C1_Init();
+	MX_USART1_UART_Init();
+	MX_USART2_UART_Init();
 
-    // IMU Setup
-    if (MPU6050_Init() != 0) {
-        // Error Handler
-    }
+	// IMU Setup
+	if (MPU6050_Init() != 0) {
+		// Error Handler (Optional: Add LED Blink here)
+	}
 
-    HAL_Delay(2000); // Wait for sensor to stabilize
-    MPU6050_Calibrate();
+	HAL_Delay(2000); // Wait for sensor to stabilize
+	MPU6050_Calibrate();
 
-    // Start Interrupts
-    HAL_UART_Receive_IT(&huart1, &gps_rx_char, 1);
-    HAL_UART_Receive_IT(&huart2, &baro_rx_byte, 1);
+	//baro update flag
 
-    uint32_t last_tick = HAL_GetTick();
+	// Start Interrupts
+	HAL_UART_Receive_IT(&huart1, &gps_rx_char, 1);
+	HAL_UART_Receive_IT(&huart2, &baro_rx_byte, 1);
 
-    // --- TIMESTAMP REFERENCE ---
-    // We capture the "Boot Time" so our timestamp starts at 0.00s
-    uint32_t boot_tick = last_tick;
+	uint32_t last_tick = HAL_GetTick();
+	float f_ax, f_ay, f_az, f_gx, f_gy, f_gz;
+	float lx, ly, lz;
 
-    float f_ax, f_ay, f_az, f_gx, f_gy, f_gz;
-    float lx, ly, lz;
-    float dt = 0.01f;
+	float dt=0.01;
 
-    // Kalman filter setup
-    KState kZ = {0};
-    kZ.pos = 0.0f; kZ.vel = 0.0f;
-    kZ.P[0][0] = 1.0f; kZ.P[1][1] = 1.0f;
-    kZ.Q[0] = 0.01f; kZ.Q[1] = 0.1f;
+	//kalman filter
+	KState kZ = {0};
+	kZ.pos = 0.0f; // Start at 0m
+	kZ.vel = 0.0f; // Start at 0m/s
 
-    while (1) {
-        // 100Hz Loop (10ms)
-        if (HAL_GetTick() - last_tick >= 10) {
-            HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13); // Heartbeat
+	// Initial Uncertainty
+	kZ.P[0][0] = 1.0f; kZ.P[0][1] = 0.0f;
+	kZ.P[1][0] = 0.0f; kZ.P[1][1] = 1.0f;
 
-            // 1. Process GPS
-            if (gps_data_ready) {
-                if (strstr(nmea_buffer, "GGA") != NULL) Parse_GGA_Generic(nmea_buffer);
-                gps_data_ready = 0;
-            }
+	// Process Noise (Tuning Knobs)
+	// Q[0] = Position Noise (small)
+	// Q[1] = Velocity/Acc Noise (trust sensor less = higher number)
+	kZ.Q[0] = 0.01f;
+	kZ.Q[1] = 0.1f;
 
-            // 2. Read IMU
-            MPU6050_Read_AccelGyro();
 
-            // 3. Normalize Data
-            f_ax = vehicleState.AccX / MPU_ACCEL_SENS;
-            f_ay = vehicleState.AccY / MPU_ACCEL_SENS;
-            f_az = vehicleState.AccZ / MPU_ACCEL_SENS;
+	while (1) {
+		// 100Hz Loop (10ms)
+		if (HAL_GetTick() - last_tick >= 10) {
+			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13); // Heartbeat
 
-            f_gx = (vehicleState.GyroX / MPU_GYRO_SENS) * DEG_TO_RAD;
-            f_gy = (vehicleState.GyroY / MPU_GYRO_SENS) * DEG_TO_RAD;
-            f_gz = (vehicleState.GyroZ / MPU_GYRO_SENS) * DEG_TO_RAD;
+			// 1. Process GPS
+			if (gps_data_ready) {
+				if (strstr(nmea_buffer, "GGA") != NULL) {
+					Parse_GGA_Generic(nmea_buffer);
+				}
+				gps_data_ready = 0;
+			}
 
-            // 4. Run Filters
-            MadgwickUpdate(&rocketQ, f_ax, f_ay, f_az, f_gx, f_gy, f_gz);
-            GravityCorrection(&rocketQ, &lx, &ly, &lz, f_ax, f_ay, f_az);
-            KPredict(&kZ, lz * 9.81f, dt);
+			// 2. Read IMU
+			MPU6050_Read_AccelGyro();
 
-            // 5. Baro Update
-            if (baro_update) {
-                if (ground_alt == 0.0f) ground_alt = vehicleState.BaroAlt;
-                float altitude_agl = vehicleState.BaroAlt - ground_alt;
-                KUpdate(&kZ, altitude_agl, 1.0f);
-                baro_update = 0;
-            }
+			// 3. Normalize Data
+			f_ax = vehicleState.AccX / MPU_ACCEL_SENS;
+			f_ay = vehicleState.AccY / MPU_ACCEL_SENS;
+			f_az = vehicleState.AccZ / MPU_ACCEL_SENS;
 
-            // --- 6. TIMESTAMP CALCULATION ---
-            float timestamp = (float)(HAL_GetTick() - boot_tick) / 1000.0f;
+			f_gx = (vehicleState.GyroX / MPU_GYRO_SENS) * DEG_TO_RAD;
+			f_gy = (vehicleState.GyroY / MPU_GYRO_SENS) * DEG_TO_RAD;
+			f_gz = (vehicleState.GyroZ / MPU_GYRO_SENS) * DEG_TO_RAD;
 
-            // --- 7. FINAL TELEMETRY STRING ---
-            // Format: Time, q0, q1, q2, q3, Lat, Lon, Alt
-            printf("%0.3f,%0.4f,%0.4f,%0.4f,%0.4f,%0.4f,%0.4f,%0.2f\n",
-                   timestamp,
-                   rocketQ.q0, rocketQ.q1, rocketQ.q2, rocketQ.q3,
-                   vehicleState.Latitude, vehicleState.Longitude,
-                   kZ.pos);
+			// 4. Run MGDW Filter
+			MadgwickUpdate(&rocketQ, f_ax, f_ay, f_az, f_gx, f_gy, f_gz);
 
-            last_tick = HAL_GetTick();
-        }
-    }
+			// 5. Calculate Linear Acceleration (Gravity Removed)
+			GravityCorrection(&rocketQ, &lx, &ly, &lz, f_ax, f_ay, f_az);
+
+			// 6. Run Kalman
+			KPredict(&kZ, lz * 9.81f, dt);
+
+			if (baro_update) {
+
+				if (ground_alt==0.0f){
+					ground_alt=vehicleState.BaroAlt;
+				}
+
+				float altitude_agl = vehicleState.BaroAlt-ground_alt;
+
+				KUpdate(&kZ, altitude_agl, 1.0f);
+				baro_update=0;
+			}
+
+			printf("%0.4f,%0.4f,%0.4f,%0.4f,%0.4f,%0.4f,%0.4f\n",rocketQ.q0,rocketQ.q1,rocketQ.q2,rocketQ.q3,vehicleState.Latitude,vehicleState.Longitude,kZ.pos);
+
+			last_tick = HAL_GetTick();
+		}
+	}
 }
+
 /* --- Sensor Fusion Algorithms --- */
 
 void KPredict(KState *k, float acc, float dt) {
